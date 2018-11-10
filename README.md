@@ -14,6 +14,7 @@ Step 2 : Link Realm
 `
 react-native link realm
 `
+
 Step 3 : How to app after installation
 
 `
