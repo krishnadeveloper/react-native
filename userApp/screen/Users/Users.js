@@ -5,6 +5,7 @@ import UserRequest from "../../api/Request/Users/UserRequest";
 import UserDetails from "./UserDetail";
 
 class AllUsersScreen extends Component{
+    
     constructor(){
         super();
         this.state = {
@@ -43,7 +44,10 @@ class AllUsersScreen extends Component{
             //console.warn(error);
         })
     }
-
+    static navigationOptions = {
+        //title:'Users',
+        header:null,
+    };
     render(){
         return(
             <SafeAreaView style={style.container}>
@@ -56,7 +60,7 @@ class AllUsersScreen extends Component{
                 </Text>
                 <FlatList 
                     data = {this.state.list}
-                    renderItem={({item})=><TouchableOpacity onPress={()=>this.props.navigation.navigate('UserDetails')} key={item.id} style={style.userRow}><Text>{item.id}. {item.name}</Text></TouchableOpacity>}
+                    renderItem={({item})=><TouchableOpacity onPress={()=>this.props.navigation.navigate('UserDetails',item)} key={item.id} style={style.userRow}><Text>{item.id}. {item.name}</Text></TouchableOpacity>}
                     keyExtractor={(item,index)=> index.toString() }
                 />
                 <ActivityIndicator style={style.loader} size="large" color="blue" hidesWhenStopped={true} animating={this.state.loading}>
@@ -70,10 +74,12 @@ class AllUsersScreen extends Component{
 
 const UserStackNavigation = createStackNavigator({
     Users:{
-        screen:AllUsersScreen
+        screen:AllUsersScreen,
+        title:'Users',
     },
     UserDetails:{
-        screen:UserDetails
+        screen:UserDetails,
+        title:'User Details'
     }
 
 },{
